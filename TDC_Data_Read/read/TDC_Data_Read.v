@@ -14,14 +14,15 @@
 module TDC_Data_Read(
     input  clk,               // 时钟
     input  reset_n,           // 复位信号
-    input  read,              // 外部的读请求,高有效，该信号应该是来自SDK端
+    input  read,              // 外部的读请求,高有效
     input  [3:0]addr_in,      // 外部读地址信号
     input  [27:0]data_in,     // 来自TDC的数据信号
     output reg[27:0]data_out, // 输出给别的模块
     output reg[3:0]addr_out,  // 输出给TDC的地址信号
     input  EF1,               // 至TDC，FIFO1空标志，高电平有效
     output reg RDN,           // 至TDC，读请求信号
-    output reg CSN            // 至TDC，片选信号
+    output reg CSN,           // 至TDC，片选信号
+    output reg AluTrigger     //主机复位 
 );
 
 reg rst_r1,rst_r2;
@@ -131,6 +132,16 @@ always@(*)
                   end
               endcase
         end
+  end
+always@(posedge clk,negedge reset_n_o)
+  begin
+      if(!reset_n_o)
+          AluTrigger <= 1'b0;
+      else
+          if(read_cs == DONE)
+              AluTrigger <= 1'b1;
+          else
+              AluTrigger <= 1'b0;
   end
 always@(*)
   begin
