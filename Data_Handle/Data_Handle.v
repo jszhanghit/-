@@ -16,12 +16,11 @@ module Data_Handle(
     input reset_n,
     input clk_i,
     input TDC_stop,           // TDC_stop信号，在该位置处开始进行clk_i上升沿检测
-    input pulse_count_start,  // 开始计数clk_i的标志，该信号应该与First_pos模块的TDC_stop相连
-    input start,stop,        // 系统开始测量的标志位
+    input start,stop,         // 系统开始测量的标志位
     input AluTriger,          // 当AluTriger有效时表明读时序完成，可以获取数据了
     input [27:0]data_in,      // 测量数据,数据来自TDC_Data_Read的输出数据
     output reg[63:0]timedata, // 最终时间数据，输出给SDK，用于sd卡存储
-    output done               // 当获得有效数据该标志位置位
+    output reg done           // 当获得有效数据该标志位置位
 );
 localparam PRECISION = 40;
 localparam CLKTIME   = 25000;
@@ -189,7 +188,7 @@ always@(posedge clk,negedge reset_n)
       else
           if(state_current == ST_STOP)
               flag_clk_i <= 1'b1;
-          else if(state_current == ST_STOP)
+          else if(state_current == SP_STOP)
               flag_clk_i <= 1'b0;
           else
               flag_clk_i <= flag_clk_i;
@@ -201,9 +200,12 @@ always@(posedge clk,negedge reset_n)
           cnt <= 64'd0;
       else
           if(flag_clk_i)
-              cnt <= cnt + 1'b1;
+              if(pulse_clk)
+                  cnt <= cnt + 1'b1;
+              else
+                  cnt <= cnt;
           else
-              cnt <= 64'd0;
+              cnt <= 64'd1;
   end
 
 always@(posedge clk,negedge reset_n)
@@ -214,7 +216,7 @@ always@(posedge clk,negedge reset_n)
           add   <= 1'b0;
         end
       else
-          if(state_current == ST_STOP)
+          if(state_current == SP_STOP)
             begin
               cnt_r <= cnt;
               add   <= 1'b1;
