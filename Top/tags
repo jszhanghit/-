@@ -1,0 +1,143 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Alu	testbench.v	/^wire Alu;$/;"	n
+CSN_1	Top.v	/^wire CSN_1,CSN_2;$/;"	n
+CSN_2	Top.v	/^wire CSN_1,CSN_2;$/;"	n
+CSN_o	Top.v	/^    output WRN_o,CSN_o,RDN_o,                   \/\/ 写、片选、读使能$/;"	p
+CSN_o	testbench.v	/^wire WRN_o,CSN_o,RDN_o;$/;"	n
+Data_Handle	Data_Handle.v	/^module Data_Handle($/;"	m
+EF1	TDC_Data_Read.v	/^    input  EF1,               \/\/ 至TDC，FIFO1空标志，高电平有效$/;"	p
+First_pos	First_pos.v	/^module First_pos($/;"	m
+Flag_Read	Flag_Read.v	/^module Flag_Read($/;"	m
+PuResN	testbench.v	/^wire PuResN;$/;"	n
+RDN_o	Top.v	/^    output WRN_o,CSN_o,RDN_o,                   \/\/ 写、片选、读使能$/;"	p
+RDN_o	testbench.v	/^wire WRN_o,CSN_o,RDN_o;$/;"	n
+StopDis1	testbench.v	/^wire StopDis1,StopDis2,StopDis3,StopDis4;$/;"	n
+StopDis2	testbench.v	/^wire StopDis1,StopDis2,StopDis3,StopDis4;$/;"	n
+StopDis3	testbench.v	/^wire StopDis1,StopDis2,StopDis3,StopDis4;$/;"	n
+StopDis4	testbench.v	/^wire StopDis1,StopDis2,StopDis3,StopDis4;$/;"	n
+TDC	Top.v	/^module TDC($/;"	m
+TDC_Data_Read	TDC_Data_Read.v	/^module TDC_Data_Read($/;"	m
+TDC_Initial	TDC_Initial.v	/^module TDC_Initial($/;"	m
+TDC_start	Top.v	/^    output TDC_stop,TDC_start,                  \/\/ 控制TDC的开始结束测量$/;"	p
+TDC_start	testbench.v	/^wire TDC_stop,TDC_start;$/;"	n
+TDC_stop	First_pos.v	/^    output TDC_stop   \/\/ TDC结束$/;"	p
+TDC_stop	Flag_Read.v	/^    input TDC_stop,$/;"	p
+TDC_stop	Top.v	/^    output TDC_stop,TDC_start,                  \/\/ 控制TDC的开始结束测量$/;"	p
+TDC_stop	testbench.v	/^wire TDC_stop,TDC_start;$/;"	n
+TDC_stop_r1	Flag_Read.v	/^reg TDC_stop_r1,TDC_stop_r2;$/;"	r
+TDC_stop_r2	Flag_Read.v	/^reg TDC_stop_r1,TDC_stop_r2;$/;"	r
+Time1	Data_Handle.v	/^reg [63:0]Time1,Time2;$/;"	r
+Time2	Data_Handle.v	/^reg [63:0]Time1,Time2;$/;"	r
+WRN	Top.v	/^wire WRN;$/;"	n
+WRN_o	Top.v	/^    output WRN_o,CSN_o,RDN_o,                   \/\/ 写、片选、读使能$/;"	p
+WRN_o	testbench.v	/^wire WRN_o,CSN_o,RDN_o;$/;"	n
+add	Data_Handle.v	/^reg add;$/;"	r
+addr	testbench.v	/^wire [3:0]addr;$/;"	n
+addr_in	Top.v	/^wire [3:0]addr_in;$/;"	n
+addr_init	Top.v	/^wire [3:0]addr_init;$/;"	n
+addr_out	Top.v	/^wire [3:0]addr_out;$/;"	n
+addr_r	TDC_Data_Read.v	/^reg[3:0]addr_r;$/;"	r
+addr_r	TDC_Initial.v	/^reg[3:0]addr_r;$/;"	r
+clk	Data_Handle.v	/^    input clk,$/;"	p
+clk	First_pos.v	/^    input clk,        \/\/ 时钟$/;"	p
+clk	Flag_Read.v	/^    input clk,$/;"	p
+clk	TDC_Data_Read.v	/^    input  clk,               \/\/ 时钟$/;"	p
+clk	TDC_Initial.v	/^        input clk,$/;"	p
+clk	Top.v	/^    input clk,$/;"	p
+clk	testbench.v	/^reg clk,reset_n;$/;"	r
+clk_i	Data_Handle.v	/^    input clk_i,$/;"	p
+clk_i	First_pos.v	/^    input clk_i,      \/\/ 外部高精度晶振输入$/;"	p
+clk_i	Top.v	/^    input clk_i,                                \/\/ 外部时钟晶振的输入$/;"	p
+clk_i	testbench.v	/^reg clk_i;$/;"	r
+clk_r1	Data_Handle.v	/^reg clk_r1,clk_r2;$/;"	r
+clk_r1	First_pos.v	/^reg clk_r1,clk_r2;$/;"	r
+clk_r2	Data_Handle.v	/^reg clk_r1,clk_r2;$/;"	r
+clk_r2	First_pos.v	/^reg clk_r1,clk_r2;$/;"	r
+cnt	Data_Handle.v	/^reg [63:0]cnt;$/;"	r
+cnt	First_pos.v	/^reg [1:0]cnt;$/;"	r
+cnt_r	Data_Handle.v	/^reg [63:0]cnt_r;$/;"	r
+cnt_s	First_pos.v	/^reg [1:0]cnt_s;$/;"	r
+data	Top.v	/^    inout [27:0]data,                           \/\/ 数据$/;"	p
+data	testbench.v	/^wire [27:0]data;$/;"	n
+data_in	Data_Handle.v	/^    input [27:0]data_in,      \/\/ 测量数据,数据来自TDC_Data_Read的输出数据$/;"	p
+data_in	TDC_Data_Read.v	/^    input  [27:0]data_in,     \/\/ 来自TDC的数据信号$/;"	p
+data_initial	Top.v	/^wire [27:0]data_initial;$/;"	n
+data_out	Top.v	/^wire [27:0]data_out;$/;"	n
+data_r	TDC_Data_Read.v	/^reg[27:0]data_r;$/;"	r
+data_r	TDC_Initial.v	/^reg[27:0]data_r;$/;"	r
+delay_time	First_pos.v	/^reg [3:0]delay_time;$/;"	r
+done	Top.v	/^    output done,                                \/\/ 完成一次数据$/;"	p
+done	testbench.v	/^wire done;$/;"	n
+flag	First_pos.v	/^reg flag;$/;"	r
+flag	Top.v	/^wire flag;$/;"	n
+flag_clk_i	Data_Handle.v	/^reg flag_clk_i;$/;"	r
+flag_start	Data_Handle.v	/^reg flag_start,flag_stop;$/;"	r
+flag_stop	Data_Handle.v	/^reg flag_start,flag_stop;$/;"	r
+input	Data_Handle.v	/^    input AluTriger,          \/\/ 当AluTriger有效时表明读时序完成，可以获取数据了$/;"	p
+input	Data_Handle.v	/^    input TDC_stop,           \/\/ TDC_stop信号，在该位置处开始进行clk_i上升沿检测$/;"	p
+input	Data_Handle.v	/^    input reset_n,$/;"	p
+input	First_pos.v	/^    input reset_n,    \/\/ 复位$/;"	p
+input	First_pos.v	/^    input start,      \/\/ 外部开始信号$/;"	p
+input	Flag_Read.v	/^    input reset_n,$/;"	p
+input	TDC_Data_Read.v	/^    input  [3:0]addr_in,      \/\/ 外部读地址信号$/;"	p
+input	TDC_Data_Read.v	/^    input  reset_n,           \/\/ 复位信号$/;"	p
+input	TDC_Initial.v	/^        input reset_n,$/;"	p
+input	Top.v	/^    input reset_n,$/;"	p
+input	Top.v	/^    input start,stop,                           \/\/ 开始结束测量的标志$/;"	p
+output	Data_Handle.v	/^    output reg[63:0]timedata, \/\/ 最终时间数据，输出给SDK，用于sd卡存储$/;"	p
+output	First_pos.v	/^    output TDC_start, \/\/ TDC开始$/;"	p
+output	Flag_Read.v	/^    output reg read$/;"	p
+output	TDC_Data_Read.v	/^    output reg RDN,           \/\/ 至TDC，读请求信号$/;"	p
+output	TDC_Data_Read.v	/^    output reg[27:0]data_out, \/\/ 输出给别的模块$/;"	p
+output	Top.v	/^    output AluTrigger$/;"	p
+output	Top.v	/^    output StopDis1,StopDis2,StopDis3,StopDis4, \/\/ 端口disable$/;"	p
+output	Top.v	/^    output [3:0]addr,                           \/\/ 地址$/;"	p
+output	Top.v	/^    output [63:0]timedata,                      \/\/ 一次测量的最终数据$/;"	p
+pos_clk	First_pos.v	/^wire pos_clk;$/;"	n
+pulse	Flag_Read.v	/^wire pulse;$/;"	n
+pulse_clk	Data_Handle.v	/^wire pulse_clk;$/;"	n
+pulse_start	Data_Handle.v	/^wire pulse_start;$/;"	n
+pulse_stop	Data_Handle.v	/^wire pulse_stop;$/;"	n
+read	TDC_Data_Read.v	/^    input  read,              \/\/ 外部的读请求,高有效$/;"	p
+read_cs	TDC_Data_Read.v	/^reg [3:0]read_cs,read_ns;$/;"	r
+read_flag	TDC_Data_Read.v	/^wire read_flag;                        \/\/ read信号检测标志,该信号是一个脉冲$/;"	n
+read_ns	TDC_Data_Read.v	/^reg [3:0]read_cs,read_ns;$/;"	r
+read_r1	TDC_Data_Read.v	/^reg read_r1,read_r2;$/;"	r
+read_r2	TDC_Data_Read.v	/^reg read_r1,read_r2;$/;"	r
+reg	Data_Handle.v	/^    output reg done           \/\/ 当获得有效数据该标志位置位$/;"	p
+reg	TDC_Data_Read.v	/^    output reg AluTrigger     \/\/ 主机复位 $/;"	p
+reg	TDC_Data_Read.v	/^    output reg CSN,           \/\/ 至TDC，片选信号$/;"	p
+reg	TDC_Data_Read.v	/^    output reg[3:0]addr_out,  \/\/ 输出给TDC的地址信号$/;"	p
+reg	TDC_Initial.v	/^        output reg StopDis1, \/\/ 关闭TStop1和TStop2 TTL的输入，高有效，表示不接受数据$/;"	p
+reg	TDC_Initial.v	/^        output reg StopDis2, \/\/ 关闭TStop3和TStop1 TTL的输入$/;"	p
+reg	TDC_Initial.v	/^        output reg StopDis3,$/;"	p
+reg	TDC_Initial.v	/^        output reg StopDis4,$/;"	p
+reg	TDC_Initial.v	/^        output reg WRN,CSN,  \/\/ 读写使能位，低电平有效$/;"	p
+reg	TDC_Initial.v	/^        output reg flag,     \/\/ 初始化完成标志，如果flag=0,标志着初始化完成$/;"	p
+reg	TDC_Initial.v	/^        output reg[27:0]data \/\/数据总线$/;"	p
+reg	TDC_Initial.v	/^        output reg[3:0]addr, \/\/地址总线$/;"	p
+reset_n	testbench.v	/^reg clk,reset_n;$/;"	r
+reset_n_o	TDC_Data_Read.v	/^wire reset_n_o;                      \/\/ 异步复位，同步释放处理后的信号$/;"	n
+rst_r1	TDC_Data_Read.v	/^reg rst_r1,rst_r2;$/;"	r
+rst_r2	TDC_Data_Read.v	/^reg rst_r1,rst_r2;$/;"	r
+start	Data_Handle.v	/^    input start,stop,         \/\/ 系统开始测量的标志位$/;"	p
+start	testbench.v	/^reg start,stop;$/;"	r
+start_pos	First_pos.v	/^reg start_pos;$/;"	r
+start_r1	Data_Handle.v	/^reg start_r1,start_r2;$/;"	r
+start_r2	Data_Handle.v	/^reg start_r1,start_r2;$/;"	r
+state_current	Data_Handle.v	/^reg [4:0]state_next,state_current;$/;"	r
+state_next	Data_Handle.v	/^reg [4:0]state_next,state_current;$/;"	r
+stop	Data_Handle.v	/^    input start,stop,         \/\/ 系统开始测量的标志位$/;"	p
+stop	First_pos.v	/^    input stop,       \/\/ 外部结束信号$/;"	p
+stop	testbench.v	/^reg start,stop;$/;"	r
+stop_r1	Data_Handle.v	/^reg stop_r1,stop_r2;$/;"	r
+stop_r2	Data_Handle.v	/^reg stop_r1,stop_r2;$/;"	r
+testbench	testbench.v	/^module testbench;$/;"	m
+timedata	testbench.v	/^wire [63:0]timedata;$/;"	n
+write_cs	TDC_Initial.v	/^reg[3:0]write_ns,write_cs;$/;"	r
+write_ns	TDC_Initial.v	/^reg[3:0]write_ns,write_cs;$/;"	r
