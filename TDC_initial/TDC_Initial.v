@@ -57,7 +57,7 @@ always@(posedge clk,negedge reset_n)
       else         write_cs <= write_ns;
   end
 
-//当flag为1时，循环进行该状态，知道flag为0
+//当flag为1时，循环进行该状态，直到flag为0
 always@(*)//次态逻辑
   begin
       if(!reset_n || !flag)
@@ -68,13 +68,14 @@ always@(*)//次态逻辑
               WRITE_PERIOD1 : write_ns = WRITE_PERIOD2;
               WRITE_PERIOD2 : write_ns = WRITE_PERIOD3;
               WRITE_PERIOD3 : write_ns = WRITE_PERIOD1;
+              default       : write_ns = IDLE;
           endcase
   end
 
 always@(posedge clk,negedge reset_n)
   begin
       if(!reset_n) addr_r <= 4'hf;
-      else addr_r         <= addr;
+      else         addr_r <= addr;
   end
 always@(posedge clk,negedge reset_n)
   begin
@@ -87,7 +88,6 @@ always@(*)//地址,数据,flag
         begin
             addr = 4'hf;
             data = 28'h000_0000;
-            flag = 1'b1;
         end
       else if(write_cs == WRITE_PERIOD1)
           case(addr)
@@ -95,73 +95,61 @@ always@(*)//地址,数据,flag
                 begin
                     addr = 4'd0;
                     data = REGISTER0;
-                    flag = 1'b1;
                 end
               4'd0    :
                 begin
                     addr = 4'd1;
                     data = REGISTER1;
-                    flag = 1'b1;
                 end
               4'd1    :
                 begin
                     addr = 4'd2;
                     data = REGISTER2;
-                    flag = 1'b1;
                 end
               4'd2    :
                 begin
                     addr = 4'd3;
                     data = REGISTER3;
-                    flag = 1'b1;
                 end
               4'd3    :
                 begin
                     addr = 4'd4;
                     data = REGISTER4;
-                    flag = 1'b1;
                 end
               4'd4    :
                 begin
                     addr = 4'd5;
                     data = REGISTER5;
-                    flag = 1'b1;
                 end
               4'd5    :
                 begin
                     addr = 4'd6;
                     data = REGISTER6;
-                    flag = 1'b1;
                 end
               4'd6    :
                 begin
                     addr = 4'd7;
                     data = REGISTER7;
-                    flag = 1'b1;
                 end
               4'd7    :
                 begin
                     addr = 4'd11;
                     data = REGISTER11;
-                    flag = 1'b1;
                 end
               4'd11   :
                 begin
                     addr = 4'd12;
                     data = REGISTER12;
-                    flag = 1'b1;
                 end
               4'd12   :
                 begin
                     addr = 4'd14;
                     data = REGISTER14;
-                    flag = 1'b1;
                 end
               4'd14   :
                 begin
                     addr = 4'he;
                     data = 28'd0;
-                    flag = 1'b0;
                 end
               default :
                 begin
@@ -175,6 +163,18 @@ always@(*)//地址,数据,flag
             data = data_r;
         end
   end
+always@(posedge clk,negedge reset_n)
+begin
+    if(!reset_n)
+        flag <= 1'b1;
+    else if(write_cs == WRITE_PERIOD1)
+        if(addr == 4'd14)
+            flag <= 1'b0;
+        else
+            flag <= 1'b1;
+    else
+        flag <= flag;
+end
 
 always@(*)//配置寄存器过程中不接受测量信号
   begin
@@ -214,7 +214,7 @@ always@(*)//配置寄存器过程中不接受测量信号
 //          - ------- ------- ------- ------- ------- ------- -
 // state     X   1   X   2   X   3   X  1    X   2   X   3   X
 //          - ------- ------- ------- ------- ------- ------- -
-always@(*)//写使能、片选
+always@(posedge clk,negedge reset_n)//写使能、片选
   begin
       if(!reset_n)
         begin
