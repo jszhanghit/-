@@ -13,7 +13,6 @@ wire flag;
 wire [63:0]timedata;
 wire [27:0]data;
 reg  EF1;
-reg [27:0]MyData[0:200];
 TDC u_TDC(
  	.clk       (clk),
 	.reset_n   (reset_n),
@@ -37,23 +36,7 @@ TDC u_TDC(
     .EF1       (EF1),
     .flag      (flag)
 );
-reg [7:0]i;
-assign data = !flag ? MyData[i] :28'hZZZ_ZZZZ;
-initial
-  begin
-      $readmemh("MyData.txt",MyData);
-  end
-
-integer t=0;
-initial
-  begin
-    i=0;
-    forever
-        begin
-            @(negedge RDN_o)
-            i = ({$random(t)} % 200);
-        end
-  end
+assign data = !flag ? 28'd1203 :28'hZZZ_ZZZZ;
 initial
   begin
       clk = 0;

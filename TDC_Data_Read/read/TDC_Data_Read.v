@@ -22,11 +22,21 @@ module TDC_Data_Read(
     input  EF1,               // 至TDC，FIFO1空标志，高电平有效
     output reg RDN,           // 至TDC，读请求信号
     output reg CSN,           // 至TDC，片选信号
-    output reg AluTrigger     //主机复位 
+    output reg AluTrigger     // 主机复位 
 );
 
 reg rst_r1,rst_r2;
 wire reset_n_o;                      // 异步复位，同步释放处理后的信号
+reg read_r1,read_r2;
+wire read_flag;                        // read信号检测标志,该信号是一个脉冲
+localparam IDLE   = 5'b00001, //数据读取的四个过程
+           WAIT_EF= 5'b00010,
+           READY  = 5'b00100,
+           READED = 5'b01000,
+           DONE   = 5'b10000;
+reg[3:0]addr_r;
+reg[27:0]data_r;
+reg [3:0]read_cs,read_ns;
 
 always@(posedge clk,negedge reset_n) // 对复位信号进行同步置位异步释放处理
   begin
@@ -43,8 +53,6 @@ always@(posedge clk,negedge reset_n) // 对复位信号进行同步置位异步�
   end
 assign reset_n_o = rst_r2;
 
-reg read_r1,read_r2;
-wire read_flag;                        // read信号检测标志,该信号是一个脉冲
 always@(posedge clk,negedge reset_n_o) // 检测read的上升沿,标志一次读请求
   begin
       if(!reset_n_o)
@@ -60,8 +68,6 @@ always@(posedge clk,negedge reset_n_o) // 检测read的上升沿,标志一次读
   end
 assign read_flag = read_r1 & !read_r2;
 
-reg[3:0]addr_r;
-reg[27:0]data_r;
 always@(posedge clk,negedge reset_n_o) //将地址信号锁存住 
   begin
       if(!reset_n_o)     addr_r <= 4'hz;
@@ -74,32 +80,29 @@ always@(posedge clk,negedge reset_n_o)
       else if(read_flag) data_r <= data_in;
       else               data_r <= data_r;
   end
-localparam IDLE   = 4'b0001, //数据读取的四个过程
-           READY  = 4'b0010,
-           READED = 4'b0100,
-           DONE   = 4'b1000;
 
-reg [3:0]read_cs,read_ns;
 always@(posedge clk,negedge reset_n_o)
   begin
       if(!reset_n_o) read_cs <= IDLE;
       else           read_cs <= read_ns;
   end
+
 always@(*)
 begin
     if(!reset_n_o)
         read_ns = IDLE;
     else
         case(read_cs)
-            IDLE   : if(read_flag && !EF1) read_ns = READY; //当read_flag有效时开始数据读取操作
-                     else                  read_ns = IDLE;
+            IDLE   : if(read_flag) read_ns = WAIT_EF; //当read_flag有效时开始数据读取操作
+                     else          read_ns = IDLE;
+            WAIT_EF: if(!EF1) read_ns = READY;
+                     else     read_ns = WAIT_EF; 
             READY  : read_ns = READED;
             READED : read_ns = DONE;
             DONE   : read_ns = IDLE;
             default: read_ns = IDLE;
         endcase
 end
-
 always@(*)
   begin
       if(!reset_n_o)
@@ -143,6 +146,7 @@ always@(posedge clk,negedge reset_n_o)
           else
               AluTrigger <= 1'b0;
   end
+
 always@(*)
   begin
       if(!reset_n_o)

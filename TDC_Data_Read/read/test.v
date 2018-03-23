@@ -32,12 +32,28 @@ initial
 
 initial
   begin
-      EF1 = 1'b0;
+      EF1=1;
+      forever 
+          begin
+            wait(read==1)
+              begin
+                  #93;
+                  EF1=0;
+              end
+            wait(RDN==0)
+              begin
+                  #20;
+                  EF1=1;
+              end
+          end
+  end
+initial
+  begin
       #200;
       reset_n = 1;
       repeat(10)
         begin
-            #2000;
+            #20000;
             addr_in = {$random}%16;
             data_in = {$random}%10000;
             read = 1;
